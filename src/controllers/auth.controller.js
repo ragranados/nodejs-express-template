@@ -1,14 +1,17 @@
-const services = require("../services/index");
+const userService = require("../services/index").userService;
+const ApiResponse = require("../responses/ApiResponse");
 
 const authController = {}
 
- authController.register = (req, res, next) => {
-    try{
-        console.log("si jala");
+authController.register = async (req, res, next) => {
+    try {
+        const {username, email, password} = req.body;
 
-        return res.status(200).json("si jala");
-    }catch(e){
-        console.error(e);
+        await userService.save(username, email, password);
+
+        return res.status(200).json(ApiResponse(true, "Insertado creado con exito"));
+    } catch (e) {
+        next(e);
     }
 }
 
