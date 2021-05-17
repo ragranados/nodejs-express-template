@@ -1,1 +1,7 @@
-var router = express.Router();
+const authController = require("./auth.controller");
+
+const controllers = {};
+
+controllers.authController = authController;
+
+module.exports = controllers;
