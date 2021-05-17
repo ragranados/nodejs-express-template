@@ -1,6 +1,7 @@
 const ServiceResponse = require("../responses/ServiceResponse");
 const userModel = require("../models/user.model");
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const service = {};
 
@@ -8,10 +9,13 @@ service.save = async (username, email, password) => {
     const session = await mongoose.startSession();
 
     try {
+
+        const encrypted = await bcrypt.hash(password, 10);
+
         const newUser = new userModel({
             username,
             email,
-            password
+            password: encrypted
         });
 
         await session.startTransaction();
