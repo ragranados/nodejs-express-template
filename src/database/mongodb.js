@@ -8,7 +8,6 @@ const dbname = process.env.DBNAME;
 const uri = process.env.DBURI || `mongodb://${dbhost}:${dbport}/${dbname}`
 
 const connect = async () => {
-    console.log(uri);
     try {
         await Mongoose.connect(uri, {
             useNewUrlParser: true,
