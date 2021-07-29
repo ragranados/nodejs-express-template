@@ -7,14 +7,14 @@ const Errors = require('../errors');
 const service = {};
 
 service.save = async (username, email, password) => {
-    //const session = await mongoose.startSession();
+    const session = await mongoose.startSession();
 
     try {
-        //await session.startTransaction();
+        await session.startTransaction();
 
-        if (!await service.isEmailAvailable()) throw new Errors.UsernameOrEmailNotAvailable(`Email ${email} already taken.`);
+        if (!await service.isEmailAvailable(email)) throw new Errors.UsernameOrEmailNotAvailable(`Email ${email} already taken.`);
 
-        if (!await service.isUsernameAvailable()) throw new Errors.UsernameOrEmailNotAvailable(`Username ${username} already taken.`);
+        if (!await service.isUsernameAvailable(username)) throw new Errors.UsernameOrEmailNotAvailable(`Username ${username} already taken.`);
 
         const encrypted = await bcrypt.hash(password, 10);
 
@@ -30,14 +30,14 @@ service.save = async (username, email, password) => {
             throw new Error("No insertado");
         }
 
-        //await session.commitTransaction();
+        await session.commitTransaction();
 
         return ServiceResponse(true, newUser);
     } catch (e) {
-        //await session.abortTransaction();
+        await session.abortTransaction();
         throw e;
     } finally {
-        //await session.endSession();
+        await session.endSession();
     }
 }
 
@@ -69,14 +69,14 @@ service.findByEmail = async (email) => {
 
 service.isEmailAvailable = async (email) => {
     const user = await userModel.findOne({email: email});
-    console.log(`user xd: ${user}`)
+    console.log(`user email: ${user}`)
 
     return user == null
 }
 
 service.isUsernameAvailable = async (username) => {
-    const user = await userModel.find({username: username});
-    console.log(`user xd: ${user}`)
+    const user = await userModel.findOne({username: username});
+    console.log(`user username: ${user}`)
 
     return user == null
 }
