@@ -17,9 +17,13 @@ authController.register = async (req, res, next) => {
 }
 
 authController.login = async (req, res, next) => {
-    try{
-        throw new Errors.NotFoundError("Prueba de error");
-    }catch (e){
+    try {
+        const {username} = req.body;
+
+        const user = await userService.findByUsername(username);
+
+        return res.status(200).json(ApiResponse(true, "Login succesfull", user));
+    } catch (e) {
         next(e);
     }
 }

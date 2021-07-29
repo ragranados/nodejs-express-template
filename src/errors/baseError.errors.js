@@ -7,7 +7,7 @@ class BaseError extends Error {
         this.name = name;
         this.statusCode = statusCode;
         this.errorCode = errorCode;
-        //this.isOperational = isOperational;
+
         Error.captureStackTrace(this);
     }
 }
