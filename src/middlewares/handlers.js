@@ -1,15 +1,12 @@
-//const debug = require("debug")("app:error");
+const debug = require("debug")("app:error");
 
 const handlers = {};
 
 handlers.errorHandler = (error, req, res, next) => {
     //debug(error);
+    //console.log(error);
 
-    if (error.detail) {
-        return res.status(400).json(error.detail);
-    }
-
-    return res.status(400).json(error.message);
+    return res.status(error.statusCode).json(error);
 
 };
 
