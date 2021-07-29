@@ -12,9 +12,9 @@ service.save = async (username, email, password) => {
     try {
         await session.startTransaction();
 
-        if (!await service.isEmailAvailable(email)) throw new Errors.UsernameOrEmailNotAvailable(`Email ${email} already taken.`);
+        if (await service.isEmailAvailable(email)) throw new Errors.UsernameOrEmailNotAvailable(`Email ${email} already taken.`);
 
-        if (!await service.isUsernameAvailable(username)) throw new Errors.UsernameOrEmailNotAvailable(`Username ${username} already taken.`);
+        if (await service.isUsernameAvailable(username)) throw new Errors.UsernameOrEmailNotAvailable(`Username ${username} already taken.`);
 
         const encrypted = await bcrypt.hash(password, 10);
 
@@ -68,17 +68,15 @@ service.findByEmail = async (email) => {
 }
 
 service.isEmailAvailable = async (email) => {
-    const user = await userModel.findOne({email: email});
-    console.log(`user email: ${user}`)
 
-    return user == null
+    return await userModel.exists({email: email});
+
 }
 
 service.isUsernameAvailable = async (username) => {
-    const user = await userModel.findOne({username: username});
-    console.log(`user username: ${user}`)
 
-    return user == null
+    return await userModel.exists({username: username});
+
 }
 
 module.exports = service;
