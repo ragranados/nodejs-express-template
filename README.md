@@ -1,7 +1,7 @@
 # login-social-media  
-Base de datos en mongo db, el orm usado es Mongoose  
 
-Variables de entorno necesarias:  
-DBHOST - Host de la base de datos  
-DBNAME - Nombre de la base de datos  
-DBURI - Uri para coneccion a la base datos (Si se proporciona, se pueden obviar las dos anteriores)
+Enviroment Variables:  
+DBHOST - Database Host.  
+DBNAME - Dtabase Name.  
+DBURI - URI for connecting to the MongoDB Database (If provided you can avoid the previous two).  
+JWTSECRET - This Enviroment variable is pass to secrete parameter to generate JWT Token.
