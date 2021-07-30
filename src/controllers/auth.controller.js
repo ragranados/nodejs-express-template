@@ -8,8 +8,10 @@ const authController = {}
 
 authController.register = async (req, res, next) => {
     try {
+        //TODO: Change user attributes
         const {username, email, password} = req.body;
 
+        //TODO: Change user attributes and make them match with service method
         await userService.save(username, email, password);
 
         return res.status(200).json(ApiResponse(true, "Insertado creado con exito"));

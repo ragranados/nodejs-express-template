@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//TODO: Add or remove user attributes as needed
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,
