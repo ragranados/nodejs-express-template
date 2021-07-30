@@ -25,9 +25,8 @@ UserSchema.methods.toPublicDTO = function () {
     //TODO: Add unwanted attributes to the array
     const notWantedAttr = ["_id", "password"];
     const userPublicDTO = {}
-    const userAttributes = Object.keys(this._doc);
 
-    userAttributes.forEach(function getPublicAttributes(element) {
+    Object.keys(this._doc).forEach(function getPublicAttributes(element) {
 
         if (!notWantedAttr.includes(element)) {
             userPublicDTO[element] = this[element];
