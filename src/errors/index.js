@@ -4,6 +4,7 @@ const BadCredentialsError = require('./badCredencialsError.errors');
 
 const Errors = {}
 
+//TODO: Add new errors here
 Errors.NotFoundError = NotFoundError;
 Errors.UsernameOrEmailNotAvailable = UsernameOrEmailNotAvailable;
 Errors.BadCredentialsError = BadCredentialsError;
