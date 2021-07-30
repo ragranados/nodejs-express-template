@@ -17,18 +17,25 @@ const UserSchema = new mongoose.Schema({
 
 /**
  *
- * @returns {{email: mongoose.Schema.methods.email, username: mongoose.Schema.methods.username}}
+ * @returns Only wanted elements that are not defined in the array
  */
 
 UserSchema.methods.toPublicDTO = function () {
 
-    //TODO: Add or remove user attributes as need in both, const declaration and return statement.
-    const {username, email} = this;
+    //TODO: Add unwanted attributes to the array
+    const notWantedAttr = ["_id", "password"];
+    const userPublicDTO = {}
+    const userAttributes = Object.keys(this._doc);
 
-    return {
-        username,
-        email
-    };
+    userAttributes.forEach(function getPublicAttributes(element) {
+
+        if (!notWantedAttr.includes(element)) {
+            userPublicDTO[element] = this[element];
+        }
+
+    }, this);
+
+    return userPublicDTO;
 }
 
 module.exports = mongoose.model("User", UserSchema)
