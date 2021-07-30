@@ -3,6 +3,7 @@ const ApiResponse = require("../responses/ApiResponse");
 const Errors = require('../errors');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const DTO = require('../dto');
 
 const authController = {}
 
@@ -41,7 +42,7 @@ authController.login = async (req, res, next) => {
                 expiresIn: "30d",
             });
 
-        return res.status(200).json(ApiResponse(true, "Login succesfull", {token, ...user.content.toPublicDTO()}));
+        return res.status(200).json(ApiResponse(true, "Login succesfull", DTO.loginDTO(token, user.content.toPublicDTO())));
     } catch (e) {
         next(e);
     }
