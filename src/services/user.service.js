@@ -48,8 +48,9 @@ service.findByUsername = async (username) => {
     const user = await userModel.findOne({username: username});
 
     if (user == null) {
-        //throw NotFoundError(`Email ${email} not found.`);
+
         throw new Errors.NotFoundError(`User ${username} not found.`);
+
     }
 
     return ServiceResponse(true, user);
@@ -61,11 +62,12 @@ service.findByEmail = async (email) => {
     const user = await userModel.findOne({email: email});
 
     if (user == null) {
-        //throw NotFoundError(`Email ${email} not found.`);
+
         throw new Errors.NotFoundError(`User with email ${email} not found.`);
+
     }
 
-    return ServiceResponse(true, user);;
+    return ServiceResponse(true, user);
 
 }
 
