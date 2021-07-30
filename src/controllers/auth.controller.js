@@ -41,7 +41,7 @@ authController.login = async (req, res, next) => {
                 expiresIn: "30d",
             });
 
-        return res.status(200).json(ApiResponse(true, "Login succesfull", token));
+        return res.status(200).json(ApiResponse(true, "Login succesfull", user.content.toPublicDTO()));
     } catch (e) {
         next(e);
     }

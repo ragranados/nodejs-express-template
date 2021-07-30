@@ -15,4 +15,14 @@ const UserSchema = new mongoose.Schema({
     }
 }, {timestamps: {createdAt: 'created_at'}});
 
+UserSchema.methods.toPublicDTO = function () {
+
+    const {username, email} = this;
+
+    return {
+        username,
+        email
+    };
+}
+
 module.exports = mongoose.model("User", UserSchema)
