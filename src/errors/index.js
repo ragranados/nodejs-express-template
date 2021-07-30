@@ -1,5 +1,5 @@
 const NotFoundError = require('./notFoundError.errors');
-const UsernameOrEmailNotAvailable = require('./usernameOrEmailNotAvailable');
+const UsernameOrEmailNotAvailable = require('./usernameOrEmailNotAvailable.errors');
 const BadCredentialsError = require('./badCredencialsError.errors');
 
 const Errors = {}

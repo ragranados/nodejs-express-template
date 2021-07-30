@@ -3,8 +3,18 @@ const Errors = require('../errors');
 const mongoose = require("mongoose");
 const errorModel = require('../models/error.model');
 
-const service = {}
+const errorService = {}
 
-service.save = () => {
+//TODO: Change error attributes as needed
+errorService.save = async (errorCode, description, statusCode) => {
+    const newError = new errorModel({
+        errorCode,
+        description,
+        statusCode
+    });
 
+    await newError.save();
 }
+
+
+module.exports = errorService;
