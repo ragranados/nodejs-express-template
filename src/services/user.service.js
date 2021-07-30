@@ -50,7 +50,7 @@ service.findByUsername = async (username) => {
         throw new Errors.NotFoundError(`User ${username} not found.`);
     }
 
-    return user;
+    return ServiceResponse(true, user);
 
 }
 
@@ -63,7 +63,7 @@ service.findByEmail = async (email) => {
         throw new Errors.NotFoundError(`User with email ${email} not found.`);
     }
 
-    return user;
+    return ServiceResponse(true, user);;
 
 }
 

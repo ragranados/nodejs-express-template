@@ -7,11 +7,15 @@ handlers.errorHandler = (error, req, res, next) => {
     //debug(error);
     console.log(error);
 
-    if(error.name === "MongoError"){
+    if (!error.statusCode) {
+        return res.status(500).json(ApiResponse("false", "Unhandled error", error));
+    }
+
+    if (error.name === "MongoError") {
         return res.status(500).json(ApiResponse("false", "Database Error", error.code));
     }
 
-    return res.status(error.statusCode).json(ApiResponse("false", "Database Error", error));
+    return res.status(error.statusCode).json(ApiResponse("false", "Error", error));
 
 };
 
