@@ -1,4 +1,3 @@
-//var passport = require('passport');
 const userService = require('../services/index').userService;
 var JwtStrategy = require('passport-jwt').Strategy;
 var {ExtractJwt} = require('passport-jwt');

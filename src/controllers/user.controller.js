@@ -9,8 +9,6 @@ const userController = {}
 
 userController.getMyProfile = (req, res, next) => {
     try {
-        //const {} = req.body;
-        //console.log(req.headers);
 
         return res.status(200).json(true);
     } catch (e) {
