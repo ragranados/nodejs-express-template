@@ -9,8 +9,9 @@ const userController = {}
 
 userController.getMyProfile = (req, res, next) => {
     try {
+        console.log(req.user.toPublicDTO());
 
-        return res.status(200).json(true);
+        return res.status(200).json(ApiResponse(true, "Success", req.user.toPublicDTO()));
     } catch (e) {
         throw e;
     }

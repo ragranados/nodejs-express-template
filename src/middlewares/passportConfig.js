@@ -10,5 +10,5 @@ opts.secretOrKey = process.env.JWTSECRET;
 exports.JwtStrategy = new JwtStrategy(opts, async (payload, done) => {
     const response = await userService.findByUsername(payload.username);
 
-    return done(null, response.status);
+    return done(null, response.content);
 });
