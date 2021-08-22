@@ -9,16 +9,16 @@ handlers.errorHandler = (error, req, res, next) => {
     console.log(error);
 
     if (!error.statusCode) {
-        return res.status(500).json(ApiResponse("false", "Unhandled error", error));
+        return res.status(500).json(ApiResponse(false, "Unhandled error", error));
     }
 
     if (error.name === "MongoError") {
-        return res.status(500).json(ApiResponse("false", "Database Error", error.code));
+        return res.status(500).json(ApiResponse(false, "Database Error", error.code));
     }
 
     if (error.save) errorService.save(error.errorCode, error.name, error.statusCode);
 
-    return res.status(error.statusCode).json(ApiResponse("false", "Error", error));
+    return res.status(error.statusCode).json(ApiResponse(false, "Error", error));
 
 };
 
