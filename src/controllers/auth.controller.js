@@ -15,7 +15,7 @@ authController.register = async (req, res, next) => {
         //TODO: Change user attributes and make them match with service method
         await userService.save(username, email, password);
 
-        return res.status(200).json(ApiResponse(true, "Insertado creado con exito"));
+        return res.status(200).json(ApiResponse(true, "Successful register"));
     } catch (e) {
         next(e);
     }
@@ -42,7 +42,7 @@ authController.login = async (req, res, next) => {
                 expiresIn: "30d",
             });
 
-        return res.status(200).json(ApiResponse(true, "Login succesfull", DTO.loginDTO(token, user.content.toPublicDTO())));
+        return res.status(200).json(ApiResponse(true, "Successful login", DTO.loginDTO(token, user.content.toPublicDTO())));
     } catch (e) {
         next(e);
     }
