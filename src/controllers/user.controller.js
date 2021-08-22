@@ -11,7 +11,7 @@ userController.getMyProfile = (req, res, next) => {
     try {
         console.log(req.user.toPublicDTO());
 
-        return res.status(200).json(ApiResponse(true, "Success", req.user.toPublicDTO()));
+        return res.status(200).json(ApiResponse(true, "Success", req.user));
     } catch (e) {
         throw e;
     }
