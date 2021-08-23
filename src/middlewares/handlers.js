@@ -25,11 +25,12 @@ handlers.errorHandler = (error, req, res, next) => {
 
 handlers.roleHandler = (roleToVerify) => (req, res, next) => {
 
-    if (req.roles.includes(roleToVerify)) {
-        next();
+    if (!req.roles.includes(roleToVerify)) {
+        return res.status(400).json(ApiResponse(false, "You dont have access to this request"));
     }
 
-    return res.status(400).json(ApiResponse(false, "You dont have access to this request"));
+    next();
+
 }
 
 module.exports = handlers;

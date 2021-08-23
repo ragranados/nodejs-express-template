@@ -9,11 +9,8 @@ const userController = {}
 
 userController.getMyProfile = (req, res, next) => {
     try {
-        //console.log(req.user.toPublicDTO());
 
-        console.log(req.roles);
-
-        return res.status(200).json(ApiResponse(true, "Success", req.user));
+        return res.status(200).json(ApiResponse(true, "Success", req.user.myProfileInfo()));
     } catch (e) {
         throw e;
     }

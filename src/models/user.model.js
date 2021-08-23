@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const roles = require("../constants/roles");
+const {eliminateAttrFromDoc} = require('../util');
 
 //TODO: Add or remove user attributes as needed.
 const UserSchema = new mongoose.Schema({
@@ -29,18 +30,20 @@ const UserSchema = new mongoose.Schema({
 UserSchema.methods.toPublicDTO = function () {
 
     //TODO: Add unwanted attributes to the array
-    const notWantedAttr = ["_id", "password"];
-    const userPublicDTO = {}
 
-    Object.keys(this._doc).forEach(function getPublicAttributes(element) {
+    return eliminateAttrFromDoc(["_id", "password"], this);
+}
 
-        if (!notWantedAttr.includes(element)) {
-            userPublicDTO[element] = this[element];
-        }
+UserSchema.methods.myProfileInfo = function () {
 
-    }, this);
+    //TODO: Add unwanted attributes to the array
 
-    return userPublicDTO;
+    return eliminateAttrFromDoc(["password"], this);
+}
+
+UserSchema.methods.removeAttributes = function (attrArray) {
+
+    return eliminateAttrFromDoc(attrArray, this);
 }
 
 module.exports = mongoose.model("User", UserSchema)
