@@ -1,5 +1,5 @@
 const BaseError = require('./baseError.errors');
-const httpCodes = require('../httpStatusCodes');
+const httpCodes = require('../constants/httpStatusCodes');
 
 class BadCredencialsError extends BaseError {
     //TODO: Add or remove BadCredencialError attributes as needed
