@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const roles = require("../constants/roles");
 
 //TODO: Add or remove user attributes as needed.
 const UserSchema = new mongoose.Schema({
@@ -12,6 +13,11 @@ const UserSchema = new mongoose.Schema({
     },
     password: {
         type: String,
+    },
+    role: {
+        type: String,
+        default: roles.USER,
+        enum: [roles.USER, roles.ADMIN]
     }
 }, {timestamps: {createdAt: 'created_at'}});
 
