@@ -1,11 +1,12 @@
 const roles = require('../constants/roles');
 
-/**
- * Middleware
- */
-
 //TODO: Add or remove roles as needed
-
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
 exports.grantRoles = (req, res, next) => {
     const grantedRoles = [];
 

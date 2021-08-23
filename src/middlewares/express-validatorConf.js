@@ -7,7 +7,6 @@ const ApiResponse = require("../responses/ApiResponse");
  * @param req
  * @param res
  */
-
 exports.runValidation = (req, res, next) => {
 
     const errors = validationResult(req);
