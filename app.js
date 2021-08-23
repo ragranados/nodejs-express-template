@@ -6,6 +6,7 @@ var logger = require('morgan');
 var db = require("./src/database/mongodb");
 var passport = require('passport');
 var passportMiddleware = require('./src/middlewares/passportConfig');
+var {grantRoles} = require('./src/middlewares/grantRoles');
 
 db.connect();
 var indexRouter = require('./src/routes/index');

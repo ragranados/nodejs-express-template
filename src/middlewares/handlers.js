@@ -1,11 +1,12 @@
 const debug = require("debug")("app:error");
 const ApiResponse = require("../responses/ApiResponse");
+const {handle} = require("express/lib/router");
 const errorService = require("../services").errorService;
 
 const handlers = {};
 
 handlers.errorHandler = (error, req, res, next) => {
-    //debug(error);
+    debug(error);
     console.log(error);
 
     if (!error.statusCode) {
@@ -22,5 +23,13 @@ handlers.errorHandler = (error, req, res, next) => {
 
 };
 
+handlers.roleHandler = (roleToVerify) => (req, res, next) => {
+
+    if (req.roles.includes(roleToVerify)) {
+        next();
+    }
+
+    return res.status(400).json(ApiResponse(false, "You dont have access to this request"));
+}
 
 module.exports = handlers;
