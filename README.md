@@ -1,4 +1,4 @@
-# login-social-media  
+# nodejs-express-template  
 
 Enviroment Variables:  
 DBHOST - Database Host.  
