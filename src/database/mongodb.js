@@ -1,21 +1,24 @@
-//const { MongoClient } = require("mongodb");
 const Mongoose = require("mongoose");
 
-const dbhost = process.env.DBHOST || "localhost";
-const dbport = process.env.DBPORT || "27017";
-const dbname = process.env.DBNAME;
+const createDbUriFromEnv = () => {
 
-const uri = process.env.DBURI || `mongodb://${dbhost}:${dbport}/${dbname}`
+    if (process.env.DBURI != undefined) return process.env.DBURI;
+
+    const dbhost = process.env.DBHOST != undefined ? process.env.DBHOST : 'mongodb';
+    const dbport = process.env.DBPORT != undefined ? process.env.DBPORT : '27017';
+    const dbname = process.env.DBNAME != undefined ? process.env.DBNAME : 'test';
+
+    return `mongodb://${dbhost}:${dbport}/${dbname}`;
+
+}
 
 const connect = async () => {
     console.log("Connecting to database...");
     try {
-        await Mongoose.connect(uri, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true,
-            useFindAndModify: false,
-        });
+
+        const uri = createDbUriFromEnv();
+
+        await Mongoose.connect(`${uri}`);
         console.log("Connection succesfull");
     } catch (error) {
         console.log("Connection failed", error);
